@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
                   );
                 },
               )),
-  
+       SizedBox(height: 30.0,),
        CarouselSlider.builder(
               itemCount: sliders.length,
               itemBuilder: (context, index, realIndex) {
@@ -63,9 +63,12 @@ class _HomeState extends State<Home> {
                 String? res1 = sliders[index].name;
                 return buildImage(res!, index, res1!);
               },
-              options: CarouselOptions(height: 200, viewportFraction: 1,enlargeCenterPage: true, enlargeStrategy: CenterPageEnlargeStrategy.height),
-              
-            ),
+              options: CarouselOptions(
+                height: 250,
+                viewportFraction: 1,
+                autoPlay: true,
+                enlargeCenterPage: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.height),),
           ],
         ),
       ),
@@ -73,8 +76,27 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildImage(String image, int index, String name) => Container(
-    child: Image.asset(image, fit: BoxFit.cover, width: MediaQuery.of(context).size.width,
-    ),  );
+    margin:const EdgeInsets.symmetric(horizontal: 5.0),
+    child: Stack(
+      children: [
+      ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+        child: Image.asset(
+          image,
+          height: 250,
+          fit: BoxFit.cover,
+          width: MediaQuery.of(context).size.width,
+        ),
+      ),
+      Container(
+        height: 250,
+        padding: const EdgeInsets.only(left: 40.0),
+        margin: const EdgeInsets.only(top:130.0),
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10),),),
+        child: Text(name, style: const TextStyle(color: Colors.white, fontSize: 20.0,fontWeight: FontWeight.bold),),
+      )
+   ], ),);
 }
 
 
