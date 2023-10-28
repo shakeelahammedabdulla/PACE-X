@@ -27,36 +27,53 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
-          children: [
-            Text('PACE'),
-            Text(
-              "X",
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-        centerTitle: true,
+        backgroundColor: Colors.white,
         elevation: 0.0,
+        title: Container(
+          alignment: Alignment.center,
+          child: RichText(
+            text: const TextSpan(
+              style: TextStyle(
+                color: Colors.black, // Set the default text color to black
+                fontWeight: FontWeight.bold,
+                fontSize: 24, // Adjust the font size as needed
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: 'PACE',
+                  style: TextStyle(color: Colors.black),
+                ),
+                TextSpan(
+                  text: 'X NEWS',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
+      
       body: Container(
-        child: Column(children: [
-          Container(
-              margin: const EdgeInsets.only(left: 10.0),
-              height: 70,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                itemBuilder: (context, index) {
-                  return CategoryTile(
-                    image: categories[index].image,
-                    categoryName: categories[index].categoryName,
-                  );
-                },
-              )),
-       SizedBox(height: 30.0,),
-       CarouselSlider.builder(
+        child: Column(
+          children: [
+            Container(
+                margin: const EdgeInsets.only(left: 10.0),
+                height: 70,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    return CategoryTile(
+                      image: categories[index].image,
+                      categoryName: categories[index].categoryName,
+                    );
+                  },
+                )),
+            SizedBox(
+              height: 30.0,
+            ),
+            CarouselSlider.builder(
               itemCount: sliders.length,
               itemBuilder: (context, index, realIndex) {
                 String? res = sliders[index].image;
@@ -64,11 +81,12 @@ class _HomeState extends State<Home> {
                 return buildImage(res!, index, res1!);
               },
               options: CarouselOptions(
-                height: 250,
-                viewportFraction: 1,
-                autoPlay: true,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.height),),
+                  height: 250,
+                  viewportFraction: 1,
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  enlargeStrategy: CenterPageEnlargeStrategy.height),
+            ),
           ],
         ),
       ),
@@ -76,30 +94,42 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildImage(String image, int index, String name) => Container(
-    margin:const EdgeInsets.symmetric(horizontal: 5.0),
-    child: Stack(
-      children: [
-      ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-        child: Image.asset(
-          image,
-          height: 250,
-          fit: BoxFit.cover,
-          width: MediaQuery.of(context).size.width,
+        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                image,
+                height: 250,
+                fit: BoxFit.cover,
+                width: MediaQuery.of(context).size.width,
+              ),
+            ),
+            Container(
+              height: 250,
+              padding: const EdgeInsets.only(left: 40.0),
+              margin: const EdgeInsets.only(top: 130.0),
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+              child: Text(
+                name,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            )
+          ],
         ),
-      ),
-      Container(
-        height: 250,
-        padding: const EdgeInsets.only(left: 40.0),
-        margin: const EdgeInsets.only(top:130.0),
-        width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10),),),
-        child: Text(name, style: const TextStyle(color: Colors.white, fontSize: 20.0,fontWeight: FontWeight.bold),),
-      )
-   ], ),);
+      );
 }
-
-
 
 class CategoryTile extends StatelessWidget {
   final image, categoryName;
