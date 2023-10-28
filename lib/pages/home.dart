@@ -4,6 +4,9 @@ import 'package:pacex/model/category_model.dart';
 import 'package:pacex/model/slider_model.dart';
 import 'package:pacex/services/data.dart';
 import 'package:pacex/services/slider_data.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+//36
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -23,6 +26,7 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+  int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +38,9 @@ class _HomeState extends State<Home> {
           child: RichText(
             text: const TextSpan(
               style: TextStyle(
-                color: Colors.black, // Set the default text color to black
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
-                fontSize: 24, // Adjust the font size as needed
+                fontSize: 24,
               ),
               children: <TextSpan>[
                 TextSpan(
@@ -52,7 +56,6 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      
       body: Container(
         child: Column(
           children: [
@@ -81,12 +84,24 @@ class _HomeState extends State<Home> {
                 return buildImage(res!, index, res1!);
               },
               options: CarouselOptions(
-                  height: 250,
-                  viewportFraction: 1,
-                  autoPlay: true,
-                  enlargeCenterPage: true,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height),
+                height: 250,
+                autoPlay: true,
+                enlargeCenterPage: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.height,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    activeIndex = index;
+                  });
+                },
+              ),
             ),
+            SizedBox(
+              height: 30.0,
+            ),
+
+            // buildIndicator()
+            // buildIndicator(sliders)
+            buildIndicator(activeIndex, sliders)
           ],
         ),
       ),
@@ -108,8 +123,8 @@ class _HomeState extends State<Home> {
             ),
             Container(
               height: 250,
-              padding: const EdgeInsets.only(left: 40.0),
-              margin: const EdgeInsets.only(top: 130.0),
+              padding: const EdgeInsets.only(left: 10.0),
+              margin: const EdgeInsets.only(top: 170.0),
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
                 color: Colors.black26,
@@ -130,6 +145,12 @@ class _HomeState extends State<Home> {
         ),
       );
 }
+
+Widget buildIndicator(int activeIndex, List<sliderModel> sliders) =>
+    AnimatedSmoothIndicator(
+      activeIndex: activeIndex,
+      count: sliders.length,
+    );
 
 class CategoryTile extends StatelessWidget {
   final image, categoryName;
