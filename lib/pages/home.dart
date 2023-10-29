@@ -56,174 +56,240 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                margin: const EdgeInsets.only(left: 10.0),
-                height: 70,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categories.length,
-                  itemBuilder: (context, index) {
-                    return CategoryTile(
-                      image: categories[index].image,
-                      categoryName: categories[index].categoryName,
-                    );
-                  },
-                )),
-            const SizedBox(
-              height: 30.0,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10.0, right: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Breaking News!',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  Text(
-                    'View All',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            CarouselSlider.builder(
-              itemCount: sliders.length,
-              itemBuilder: (context, index, realIndex) {
-                String? res = sliders[index].image;
-                String? res1 = sliders[index].name;
-                return buildImage(res!, index, res1!);
-              },
-              options: CarouselOptions(
-                height: 250,
-                autoPlay: true,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.height,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    activeIndex = index;
-                  });
-                },
-              ),
-            ),
-            const Center(
-              child: SizedBox(
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                  margin: const EdgeInsets.only(left: 10.0),
+                  height: 70,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categories.length,
+                    itemBuilder: (context, index) {
+                      return CategoryTile(
+                        image: categories[index].image,
+                        categoryName: categories[index].categoryName,
+                      );
+                    },
+                  )),
+              const SizedBox(
                 height: 30.0,
               ),
-            ),
-            Center(child: buildIndicator(activeIndex, sliders)),
-            Column(
-              children: [
-                const SizedBox(
-                  height: 5.0,
+              const Padding(
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Breaking News!',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    Text(
+                      'View All',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Trending News!',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50.0,
-                      ),
-                      Text(
-                        'View All',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
+              ),
+              CarouselSlider.builder(
+                itemCount: sliders.length,
+                itemBuilder: (context, index, realIndex) {
+                  String? res = sliders[index].image;
+                  String? res1 = sliders[index].name;
+                  return buildImage(res!, index, res1!);
+                },
+                options: CarouselOptions(
+                  height: 250,
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  enlargeStrategy: CenterPageEnlargeStrategy.height,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      activeIndex = index;
+                    });
+                  },
+                ),
+              ),
+              const Center(
+                child: SizedBox(
+                  height: 30.0,
+                ),
+              ),
+              Center(child: buildIndicator(activeIndex, sliders)),
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 5.0,
                   ),
-                ),
-           const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Material(
-                    elevation: 3.0,
-                    borderRadius: BorderRadius.circular(10),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Trending News!',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50.0,
+                        ),
+                        Text(
+                          'View All',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Material(
+                      elevation: 3.0,
+                      borderRadius: BorderRadius.circular(10),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                              child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
                             child: Image.asset(
                               "images/sport.jpg",
                               height: 150,
                               width: 150,
                               fit: BoxFit.cover,
                             ),
-                          )),
-                     const SizedBox(
+                          ),
+                          const SizedBox(
                             width: 8.0,
                           ),
-                          Column(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width / 1.8,
-                                child: const Text(
-                                  "Cities worldwide have been!!",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 17,
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  child: const Text(
+                                    "Athletes Prepare for Elite Road Races in Florence",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 17,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            const SizedBox(
-                                height: 7.0,
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width / 1.8,
-                                child: const Text(
-                                  "Then a final kick to beat lennard kanna",
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
+                                const SizedBox(
+                                  height: 7.0,
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  child: const Text(
+                                    "Top cyclists from around the world gather in Florence",
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                )
-              ],
-            )
-          ],
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Material(
+                      elevation: 3.0,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
+                            child: Image.asset(
+                              "images/building.jpg",
+                              height: 150,
+                              width: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8.0,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  child: const Text(
+                                    "Architect Discovers Secret Portal Hidden in Office Desk Drawer",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 7.0,
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  child: const Text(
+                                    "An architect stumbles upon an otherworldly portal desk drawer",
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
