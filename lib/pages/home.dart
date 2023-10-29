@@ -131,10 +131,10 @@ class _HomeState extends State<Home> {
             Center(child: buildIndicator(activeIndex, sliders)),
             Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 5.0,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -161,6 +161,66 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
+           const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Material(
+                    elevation: 3.0,
+                    borderRadius: BorderRadius.circular(10),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              "images/sport.jpg",
+                              height: 150,
+                              width: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          )),
+                     const SizedBox(
+                            width: 8.0,
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width / 1.8,
+                                child: const Text(
+                                  "Cities worldwide have been!!",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ),
+                            const SizedBox(
+                                height: 7.0,
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width / 1.8,
+                                child: const Text(
+                                  "Then a final kick to beat lennard kanna",
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
               ],
             )
           ],

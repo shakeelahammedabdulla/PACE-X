@@ -72,12 +72,13 @@ flutter:
   uses-material-design: true
 
   assets:
+    - images/building.jpg
     - images/business.jpg
     - images/entertainment.jpg
     - images/general.jpg
     - images/health.jpg
     - images/sport.jpg
-
+    - images/science.jpg
            
 
   # An image asset can refer to one or more resolution-specific "variants", see
