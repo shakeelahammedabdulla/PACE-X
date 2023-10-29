@@ -221,11 +221,11 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                         ],
-                      ),
+                      ), 
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
