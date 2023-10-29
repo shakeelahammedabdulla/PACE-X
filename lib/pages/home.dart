@@ -74,29 +74,36 @@ class _HomeState extends State<Home> {
                     );
                   },
                 )),
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
- 
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Text(
-                'Breaking News!',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0, right: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Breaking News!',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                  Text(
+                    'View All',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
               ),
             ),
-
-            Text(
-              'View All',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16),
-            ),
-
             CarouselSlider.builder(
               itemCount: sliders.length,
               itemBuilder: (context, index, realIndex) {
@@ -116,13 +123,46 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
-            SizedBox(
-              height: 30.0,
+            const Center(
+              child: SizedBox(
+                height: 30.0,
+              ),
             ),
-
-            // buildIndicator()
-            // buildIndicator(sliders)
-            buildIndicator(activeIndex, sliders)
+            Center(child: buildIndicator(activeIndex, sliders)),
+            Column(
+              children: [
+                SizedBox(
+                  height: 5.0,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Trending News!',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 50.0,
+                      ),
+                      Text(
+                        'View All',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
@@ -171,8 +211,8 @@ Widget buildIndicator(int activeIndex, List<sliderModel> sliders) =>
     AnimatedSmoothIndicator(
       activeIndex: activeIndex,
       count: sliders.length,
-      effect:
-          SlideEffect(dotWidth: 20, dotHeight: 20, activeDotColor: Colors.blue),
+      effect: const SlideEffect(
+          dotWidth: 20, dotHeight: 20, activeDotColor: Colors.blue),
     );
 
 class CategoryTile extends StatelessWidget {
