@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:pacex/model/article_model.dart';
 import 'package:pacex/model/category_model.dart';
 import 'package:pacex/model/slider_model.dart';
 import 'package:pacex/services/data.dart';
+import 'package:pacex/services/news.dart';
 import 'package:pacex/services/slider_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -18,6 +20,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<CategoryModel> categories = [];
   List<sliderModel> sliders = [];
+  List<ArticleModel> articles = [];
+
   @override
   void initState() {
     categories = getCategories();
@@ -27,6 +31,16 @@ class _HomeState extends State<Home> {
   }
 
   int activeIndex = 0;
+
+  getNews() async {
+    News newsclass = News();
+    await newsclass.getNews();
+    articles = newsclass.news;
+    setState(() {
+      
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,7 +235,7 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                         ],
-                      ), 
+                      ),
                     ),
                   ),
                   const SizedBox(

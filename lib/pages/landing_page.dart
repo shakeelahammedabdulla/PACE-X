@@ -72,8 +72,8 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
+import 'package:pacex/pages/home.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -122,11 +122,11 @@ class _LandingPageState extends State<LandingPage> {
               ),
             ),
             SizedBox(
-              height: 20.0,  // Adjusted the SizedBox height to provide some spacing.
+              height: 20.0,
             ),
             ElevatedButton(
               onPressed: () {
-                // Add your action here
+                const Home();
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.blue,
@@ -134,7 +134,7 @@ class _LandingPageState extends State<LandingPage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
               ),
-              child:Padding(
+              child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
                 child: Text(
                   "Get Started",
