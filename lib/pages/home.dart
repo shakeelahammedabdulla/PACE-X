@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pacex/model/article_model.dart';
@@ -21,12 +22,12 @@ class _HomeState extends State<Home> {
   List<CategoryModel> categories = [];
   List<sliderModel> sliders = [];
   List<ArticleModel> articles = [];
+  bool _loading = true;
 
   @override
   void initState() {
     categories = getCategories();
     sliders = getSliders();
-
     super.initState();
   }
 
@@ -37,9 +38,11 @@ class _HomeState extends State<Home> {
     await newsclass.getNews();
     articles = newsclass.news;
     setState(() {
-      
+      _loading = false;
     });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +95,14 @@ class _HomeState extends State<Home> {
               const SizedBox(
                 height: 30.0,
               ),
-              const Padding(
+
+              // GestureDetector(
+              //   onTap: (){
+
+              //   },
+              // ),
+              
+              Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -188,7 +198,7 @@ class _HomeState extends State<Home> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ClipRRect(
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(10),
                               bottomLeft: Radius.circular(10),
                             ),
@@ -388,6 +398,83 @@ class CategoryTile extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+
+
+class BlogTile extends StatelessWidget {
+  String imageUrl, title, desc, url;
+  BlogTile({required this.desc, required this.imageUrl, required this.title, required this.url});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> ArticleView(blogUrl:url )));
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Material(
+            elevation: 3.0,
+            borderRadius: BorderRadius.circular(10),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  
+                  Container(
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                            height: 120,
+                            width: 120,
+                            fit: BoxFit.cover, 
+                          ))),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width / 1.7,
+                        child: Text(
+                          title,
+                          maxLines: 2,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17.0),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width / 1.7,
+                        child: Text(
+                          desc,
+                          maxLines: 3,
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
