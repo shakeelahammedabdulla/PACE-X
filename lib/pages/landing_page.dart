@@ -124,9 +124,15 @@ class _LandingPageState extends State<LandingPage> {
             SizedBox(
               height: 20.0,
             ),
+
+          
             ElevatedButton(
               onPressed: () {
-                const Home();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Home(),
+                    ),
+                  );
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.blue,
