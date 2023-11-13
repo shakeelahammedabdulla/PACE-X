@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pacex/model/article_model.dart';
 import 'package:pacex/model/category_model.dart';
 import 'package:pacex/model/slider_model.dart';
+import 'package:pacex/pages/article_view.dart';
 import 'package:pacex/services/data.dart';
 import 'package:pacex/services/news.dart';
 import 'package:pacex/services/slider_data.dart';
@@ -414,8 +415,8 @@ class BlogTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(context,
-        //     MaterialPageRoute(builder: (context) => ArticleView(blogUrl: url)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ArticleView(blogUrl: url)));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 10.0),
