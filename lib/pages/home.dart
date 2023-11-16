@@ -11,6 +11,7 @@ import 'package:pacex/services/slider_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 //36:   1:37 MINUTES
+// transcripted
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
