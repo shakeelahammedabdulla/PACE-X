@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     categories = getCategories();
-    sliders = getSliders();
+    getSlider();
     getNews();
     super.initState();
   }
@@ -43,6 +43,18 @@ class _HomeState extends State<Home> {
       _loading = false;
     });
   }
+
+
+  getSlider() async {
+    Sliders slider= Sliders();
+    await slider.getSlider();
+    sliders = slider.sliders;
+  setState(() {
+    _loading =false;
+  });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
