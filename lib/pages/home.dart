@@ -10,7 +10,7 @@ import 'package:pacex/services/news.dart';
 import 'package:pacex/services/slider_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-//36
+//36:   1:37 MINUTES
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -143,11 +143,18 @@ class _HomeState extends State<Home> {
               ),
               CarouselSlider.builder(
                 itemCount: sliders.length,
-                itemBuilder: (context, index, realIndex) {
-                  String? res = sliders[index].image;
-                  String? res1 = sliders[index].name;
-                  return buildImage(res!, index, res1!);
-                },
+                itemBuilder: (context, index, realIndex)
+                // {
+                //   String? res = sliders[index].image;
+                //   String? res1 = sliders[index].name;
+                //   return buildImage(res!, index, res1!);
+                // },
+                {
+                          String? res = sliders[index].urlToImage;
+                          String? res1 = sliders[index].title;
+                          return buildImage(res!, index, res1!);
+                        },
+                
                 options: CarouselOptions(
                   height: 250,
                   autoPlay: true,
