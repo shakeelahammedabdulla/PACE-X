@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:pacex/model/article_model.dart';
 import 'package:pacex/model/category_model.dart';
 import 'package:pacex/model/slider_model.dart';
+import 'package:pacex/pages/article_view.dart';
 import 'package:pacex/services/data.dart';
 import 'package:pacex/services/news.dart';
 import 'package:pacex/services/slider_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-//36
+//36:   1:37 MINUTES
+// transcripted
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -27,7 +29,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     categories = getCategories();
-    sliders = getSliders();
+    getSlider();
     getNews();
     super.initState();
   }
@@ -42,6 +44,18 @@ class _HomeState extends State<Home> {
       _loading = false;
     });
   }
+
+
+  getSlider() async {
+    Sliders slider= Sliders();
+    await slider.getSlider();
+    sliders = slider.sliders;
+  setState(() {
+    _loading =false;
+  });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,11 +144,18 @@ class _HomeState extends State<Home> {
               ),
               CarouselSlider.builder(
                 itemCount: sliders.length,
-                itemBuilder: (context, index, realIndex) {
-                  String? res = sliders[index].image;
-                  String? res1 = sliders[index].name;
-                  return buildImage(res!, index, res1!);
-                },
+                itemBuilder: (context, index, realIndex)
+                // {
+                //   String? res = sliders[index].image;
+                //   String? res1 = sliders[index].name;
+                //   return buildImage(res!, index, res1!);
+                // },
+                {
+                          String? res = sliders[index].urlToImage;
+                          String? res1 = sliders[index].title;
+                          return buildImage(res!, index, res1!);
+                        },
+                
                 options: CarouselOptions(
                   height: 250,
                   autoPlay: true,
@@ -414,8 +435,8 @@ class BlogTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(context,
-        //     MaterialPageRoute(builder: (context) => ArticleView(blogUrl: url)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ArticleView(blogUrl: url)));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 10.0),

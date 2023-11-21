@@ -9,7 +9,6 @@ class ArticleView extends StatefulWidget {
   @override
   State<ArticleView> createState() => _ArticleViewState();
 }
-
 class _ArticleViewState extends State<ArticleView> {
   @override
   Widget build(BuildContext context) {

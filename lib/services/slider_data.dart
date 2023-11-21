@@ -1,25 +1,32 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:pacex/model/slider_model.dart';
 
+class Sliders {
+  List<sliderModel> sliders = [];
 
-List<sliderModel> getSliders() {
-  List<sliderModel> slider = [];
-  
-  sliderModel categoryModel = new sliderModel();
-  categoryModel.image = "images/business.jpg";
-  categoryModel.name = "Bow to the authority of silenceforce";
-  slider.add(categoryModel);
+  Future<void> getSlider() async {
+    String url =
+        "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=8eb940539c874fa98a2050d4afde5d5b";
+    var response = await http.get(Uri.parse(url));
 
-  categoryModel = new sliderModel();
-  categoryModel.image = "images/entertainment.jpg";
-  categoryModel.name = "Bow to the authority of silenceforce";
-  slider.add(categoryModel);
+    var jsonData = jsonDecode(response.body);
 
-  categoryModel = new sliderModel();
-  categoryModel.image = "images/health.jpg";
-  categoryModel.name = "Bow to the authority of silenceforce";
-  slider.add(categoryModel);
-
-  categoryModel = new sliderModel();
-
-  return slider;
+    if (jsonData['status'] == 'ok') {
+      jsonData["articles"].forEach((element) {
+        if (element["urlToImage"] != null && element['description'] != null) {
+          sliderModel slidermodel = sliderModel(
+            title: element["title"],
+            description: element["description"],
+            url: element["url"],
+            urlToImage: element["urlToImage"],
+            content: element["content"],
+            author: element["author"],
+          );
+          sliders.add(slidermodel);
+        }
+      });
+    }
+  }
 }
